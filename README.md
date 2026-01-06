@@ -1,3 +1,16 @@
+# Build docker and exec
+
+
+``` bash
+git submodule update --init --recursive
+docker compose build
+docker compose up -d
+docker exec -it hybvio_terrence-ros-1 bash
+```
+
+Now you can continue with step "Benchmarking and the main binary".
+They state as an example to use EuRoC. The EuRoC Dataset download will not work because of changed dataset host (now they are here https://www.research-collection.ethz.ch/entities/researchdata/bcaf173e-5dac-484b-bc37-faf97a594f1f) 
+
 # HybVIO
 
 **A visual-inertial odometry system with an optional SLAM module**.
