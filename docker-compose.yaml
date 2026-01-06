@@ -1,0 +1,35 @@
+services:
+  ros:
+    build:
+      context: .
+      dockerfile: Dockerfile    # your Dockerfile in repo root
+    stdin_open: true
+    tty: true
+    working_dir: /root/HybVIO_Terrence
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1      # avoids some X11 shm issues
+
+    volumes:
+      # X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # 👉 mount EVERYTHING in the repo into the container
+      - ./:/root/HybVIO_Terrence
+
+      # shared memory for e.g. OpenCV/ROS
+      - /dev/shm:/dev/shm
+
+    devices:
+      # GPU / Mesa (DRI)
+      - /dev/dri:/dev/dri
+
+      # serial example (uncomment if needed)
+      # - /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5069RR4-if00-port0
+
+    group_add:
+      - video
+
+    network_mode: host
+
